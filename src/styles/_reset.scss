@@ -1,0 +1,21 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  font-weight: normal;
+  font-style: normal;
+  background: #f3f3f3;
+}
+
+// Importar fuente personalizada
+@font-face {
+  font-family: 'Jersey25';
+  src: url('/fonts/Jersey25-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
