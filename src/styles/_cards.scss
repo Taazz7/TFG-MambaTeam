@@ -14,12 +14,34 @@
   }
 }
 
+/* ============================================
+   LAYOUT DE CARDS - Flex con centrado automático
+   Máximo 3 cards por fila en desktop
+   ============================================ */
 .cards {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
-
-  @include responsive(tablet) {
-    grid-template-columns: repeat(3, 1fr);
+  justify-content: center; // ✨ Esto centra automáticamente las cards sobrantes
+  
+  .card {
+    // Mobile: 1 card por fila (100%)
+    flex: 1 1 100%;
+    max-width: 100%;
+    
+    // Tablet pequeño: 2 cards por fila (~50%)
+    @include responsive(mobile) {
+      flex: 1 1 calc(50% - 10px);
+      max-width: calc(50% - 10px);
+    }
+    
+    // Desktop: 3 cards por fila (~33%)
+    // Las 2 últimas se centrarán automáticamente
+    @include responsive(tablet) {
+      flex: 1 1 calc(33.333% - 12px);
+      max-width: calc(33.333% - 12px);
+      min-width: 280px; // Mínimo para que se vea bien
+    }
   }
 }
 
@@ -29,6 +51,13 @@
   border-radius: 10px;
   overflow: hidden;
   height: 100%;
+  border: 1px solid rgba(244, 250, 87, 0.25);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  @include hover-lift;
+
+  &:hover {
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+  }
 
   &__img {
     width: 100%;
@@ -49,7 +78,7 @@
 
 @include responsive(desktop) {
   .card__img {
-    width: 350px;
+    width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -61,16 +90,12 @@
   @include center-content;
   margin: $spacing-lg auto;
   padding: 0 $spacing-sm;
-  display: grid;
+  
+  /* Mismo sistema de flex centrado */
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
-
-  @include responsive(mobile) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include responsive(tablet) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  justify-content: center;
 
   .card {
     background: $color-dark;
@@ -85,6 +110,22 @@
     &:hover {
       box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
     }
+    
+    // Mobile: 1 card por fila
+    flex: 1 1 100%;
+    max-width: 100%;
+    
+    // Tablet: 2 cards por fila
+    @include responsive(mobile) {
+      flex: 1 1 calc(50% - 10px);
+      max-width: calc(50% - 10px);
+    }
+    
+    // Desktop: 3 cards por fila (máximo)
+    @include responsive(tablet) {
+      flex: 1 1 calc(33.333% - 12px);
+      max-width: calc(33.333% - 12px);
+    }
 
     img {
       width: 100%;
@@ -93,12 +134,6 @@
       object-fit: cover;
       background: #111;
       border-bottom: 1px solid rgba(244, 250, 87, 0.15);
-
-      @include responsive(desktop) {
-        max-width: 350px;
-        margin: 0 auto;
-        width: 100%;
-      }
     }
 
     &__body {
