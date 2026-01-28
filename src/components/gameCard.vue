@@ -24,5 +24,5 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import '@/src/styles/main.scss';
+@import '../src/styles/main.scss';
 </style>
