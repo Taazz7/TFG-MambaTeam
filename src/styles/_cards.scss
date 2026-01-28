@@ -14,33 +14,29 @@
   }
 }
 
-/* ============================================
-   LAYOUT DE CARDS - Flex con centrado automático
-   Máximo 3 cards por fila en desktop
-   ============================================ */
 .cards {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  justify-content: center; // ✨ Esto centra automáticamente las cards sobrantes
+  justify-content: center; // Centrado automatico
   
   .card {
-    // Mobile: 1 card por fila (100%)
+    // Mobile: 1 card por fila
     flex: 1 1 100%;
     max-width: 100%;
     
-    // Tablet pequeño: 2 cards por fila (~50%)
+    // Tablet pequeño: 2 cards por fila
     @include responsive(mobile) {
       flex: 1 1 calc(50% - 10px);
       max-width: calc(50% - 10px);
     }
     
-    // Desktop: 3 cards por fila (~33%)
-    // Las 2 últimas se centrarán automáticamente
+    // Desktop: 3 cards por fila
+    // Las 2 últimas centradas automáticamente
     @include responsive(tablet) {
       flex: 1 1 calc(33.333% - 12px);
       max-width: calc(33.333% - 12px);
-      min-width: 280px; // Mínimo para que se vea bien
+      min-width: 280px;
     }
   }
 }
