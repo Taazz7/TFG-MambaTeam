@@ -24,5 +24,5 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-// Los estilos están en _cards.scss
+@import '@/src/styles/main.scss';
 </style>

@@ -36,6 +36,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/_header.scss';
-@import '@/styles/_nav.scss';
+@import '@/src/styles/main.scss';
 </style>

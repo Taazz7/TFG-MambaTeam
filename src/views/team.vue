@@ -87,6 +87,5 @@ watch(() => route.params.categoria, (newCategory) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/_cards.scss';
-@import '@/styles/_utilities.scss';
+@import '@/src/styles/main.scss';
 </style>

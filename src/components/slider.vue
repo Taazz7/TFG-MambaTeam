@@ -103,5 +103,5 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/_slider.scss';
+@import '@/src/styles/main.scss';
 </style>

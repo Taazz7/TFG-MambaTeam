@@ -90,5 +90,5 @@ watch(() => route.params.id, (newId) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/_player.scss';
+@import '@/src/styles/main.scss';
 </style>

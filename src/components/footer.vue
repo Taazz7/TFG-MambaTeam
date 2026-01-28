@@ -65,5 +65,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/_footer.scss';
+@import '@/src/styles/main.scss';
 </style>
