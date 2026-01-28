@@ -61,5 +61,5 @@ const upcomingGames = ref([
 </script>
 
 <style lang="scss" scoped>
-@import '../src/styles/main.scss'; //Opcion de implementar con vite en memoria
+@import '@/styles/main.scss';
 </style>
