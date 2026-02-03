@@ -9,13 +9,11 @@
         />
       </div>
 
-      <h2 class="player__title">{{ playerData.name }}</h2>
-      <h4 class="player__team">{{ playerData.team }}</h4>
 
       <div class="player__content">
         
         <!-- Foto y Posición -->
-        <div class="player__left">
+        <div class="player__left">       
           <img 
             :src="playerData.photo" 
             :alt="playerData.name" 
@@ -28,6 +26,8 @@
 
         <!-- Estadísticas -->
         <div class="player__right">
+          <h2 class="player__title">{{ playerData.name }}</h2>
+          <h4 class="player__team">{{ playerData.team }}</h4>
           <div 
             v-for="(stat, index) in playerData.stats" 
             :key="index" 
