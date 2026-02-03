@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <section class="player">
-      <h2 class="player__title">{{ playerData.name }}</h2> <!-- Comprobar id para diferenciar entre Nac y Arag -->
+      <h2 class="player__title">{{ playerData.name }}</h2> <!-- Comprobar id equipo para diferenciar entre Nac y Arag -->
       <h4 class="player__team">{{ playerData.team }}</h4>
 
       <div class="player__content">
@@ -61,21 +61,22 @@ const playersDatabase = {
       { label: 'PUNTOS POR PARTIDO', value: '23.3' },
       { label: 'REBOTES POR PARTIDO', value: '7.9' },
       { label: 'ASISTENCIAS POR PARTIDO', value: '8.1' },
-      { label: 'MINUTOS POR PARTIDO', value: '24:37' },
-      { label: 'VALORACIÓN POR PARTIDO', value: '20.5' }
+      { label: '% TIROS LIBRES POR PARTIDO', value: '72.6' },
+      { label: '% TIROS 2PTS POR PARTIDO', value: '20.5' },
+      { label: '% TIROS 3PTS POR PARTIDO', value: '32.1' }
     ]
   },
   2: {
-    name: 'Carlos Martínez',
-    team: 'NACIONAL A1',
+    name: 'Pau Rodríguez',
+    team: '2 Aragonesa',
     photo: '/img/1.png',
     position: 'Alero',
     stats: [
       { label: 'PUNTOS POR PARTIDO', value: '18.5' },
-      { label: 'REBOTES POR PARTIDO', value: '5.3' },
-      { label: 'ASISTENCIAS POR PARTIDO', value: '4.2' },
-      { label: 'MINUTOS POR PARTIDO', value: '22:15' },
-      { label: 'VALORACIÓN POR PARTIDO', value: '16.8' }
+      { label: 'TIROS LIBRES POR PARTIDO', value: '5.3' },
+      { label: '% TIROS LIBRES POR PARTIDO', value: '4.2' },
+      { label: 'TIROS DE 2PTS POR PARTIDO', value: '22:15' },
+      { label: 'TIROS DE 3PTS POR PARTIDO', value: '16.8' }
     ]
   }
 }
