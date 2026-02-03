@@ -1,5 +1,13 @@
 <template>
   <div>
+    <div class="team-header">
+      <Dropdown
+        v-model="selectedCategory"
+        :options="categoryOptions"
+        label="Selecciona un equipo:"
+      />
+    </div>
+
     <h2 class="Subtitulo">{{ teamData.name }}</h2>
     <h2 class="Subtitulo">Record: {{ teamData.record }}</h2>
     
@@ -17,10 +25,13 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import PlayerCard from '@/components/PlayerCard.vue'
+import Dropdown from '@/components/Dropdown.vue'
 
 const route = useRoute()
+const router = useRouter()
+
 const props = defineProps({
   categoria: {
     type: String,
@@ -77,15 +88,38 @@ const teams = {
   }
 }
 
-const currentCategory = computed(() => props.categoria || route.params.categoria || 'nacA1Masc')
+// Opciones para el dropdown
+const categoryOptions = computed(() => [
+  { value: 'nacA1Masc', label: 'Nacional A1 Masculino' },
+  { value: 'nacA2Masc', label: 'Nacional A2 Masculino' },
+  { value: 'nacA2Fem', label: 'Nacional A2 Femenino' },
+  { value: '2Arag', label: '2ª Aragonesa' },
+  { value: '3Arag', label: '3ª Aragonesa' }
+])
+
+const selectedCategory = ref(props.categoria || route.params.categoria || 'nacA1Masc')
+const currentCategory = computed(() => selectedCategory.value)
 const teamData = computed(() => teams[currentCategory.value] || teams.nacA1Masc)
 
-// Actualizar cuando cambia la categoría
+// Actualizar la URL cuando cambia la selección
+watch(selectedCategory, (newCategory) => {
+  router.push(`/equipo/${newCategory}`)
+})
+
+// Actualizar cuando cambia la categoría en la URL
 watch(() => route.params.categoria, (newCategory) => {
-  console.log('Categoría cambiada a:', newCategory)
+  if (newCategory && newCategory !== selectedCategory.value) {
+    selectedCategory.value = newCategory
+  }
 })
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/main.scss';
+
+.team-header {
+  padding: $spacing-xl $spacing-sm $spacing-lg;
+  display: flex;
+  justify-content: center;
+}
 </style>
