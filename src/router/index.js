@@ -14,12 +14,14 @@ const routes = [
   {
     path: '/formularioJugador',
     name: 'FormularioJugador',
-    component: FormularioJugador
+    component: FormularioJugador,
+    props: true
   },
   {
     path: '/formularioPatrocinador',
     name: 'FormularioPatrocinador',
-    component: FormularioPatrocinador
+    component: FormularioPatrocinador,
+    props: true    
   },
   {
     path: '/equipo/:categoria?',
@@ -37,7 +39,7 @@ const routes = [
 ]
 
 //preguntar a oliver si esto da problema al entrar en los forms (hay que refrescar la pagina para que se muestren)
-const router = createRouter({
+/*const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
@@ -47,6 +49,11 @@ const router = createRouter({
       return { top: 0 }
     }
   }
+})*/
+const router = createRouter({
+  history: createWebHistory(),
+  routes
 })
+
 
 export default router
