@@ -14,10 +14,10 @@
             <router-link class="nav__link" to="/">Home</router-link>
           </li>
           <li class="nav__item">
-            <router-link class="nav__link" to="/equipo/nacA1Masc">Equipo</router-link>
+            <router-link class="nav__link" to="/equipo/nacA1Masc">Equipos</router-link>
           </li>
           <li class="nav__item">
-            <router-link class="nav__link" to="/jugador">Jugador</router-link>
+            <router-link class="nav__link" to="/jugador">Jugadores</router-link>
           </li>
         </ul>
       </nav>
