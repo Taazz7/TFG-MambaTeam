@@ -20,7 +20,20 @@ const routes = [
     name: 'Player',
     component: Player,
     props: true
+  },
+  {
+    path: '/jugadores/nuevo',
+    name: 'NuevoJugador',
+    component: FormularioJugador,
+    meta: { title: 'Registrar Nuevo Jugador' }
+  },
+  {
+    path: '/patrocinadores/nuevo',
+    name: 'NuevoPatrocinador',
+    component: FormularioPatrocinador,
+    meta: { title: 'Registrar Nuevo Patrocinador' }
   }
+
 ]
 
 const router = createRouter({
