@@ -19,14 +19,15 @@
           <li class="nav__item">
             <router-link class="nav__link" to="/jugador">Jugadores</router-link>
           </li>
+          <li class="nav__item">
+            <router-link class="nav__link" to="/formularioJugador">Nuevo Jugador</router-link>
+          </li>
+          <li class="nav__item">
+            <router-link class="nav__link" to="/formularioPatrocinador">Nuevo Patrocinador</router-link>
+          </li>          
         </ul>
       </nav>
 
-      <router-link class="header__menu" to="/equipo/nacA1Masc" aria-label="Menú">
-        <span class="header__menu-line"></span>
-        <span class="header__menu-line"></span>
-        <span class="header__menu-line"></span>
-      </router-link>
     </div>
   </header>
 </template>
