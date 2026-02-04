@@ -263,10 +263,6 @@ const validateForm = () => {
     newErrors.posicion = 'La posición es obligatoria';
   }
   
-  if (!formData.dorsal && formData.dorsal !== 0) {
-    newErrors.dorsal = 'El dorsal es obligatorio';
-  }
-  
   Object.keys(errors).forEach(key => delete errors[key]);
   Object.assign(errors, newErrors);
   
