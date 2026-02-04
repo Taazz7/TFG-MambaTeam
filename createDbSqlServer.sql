@@ -242,18 +242,145 @@ INSERT INTO JugadoresArag (nombre, posicion, idEquipo, dorsal)
 VALUES ('ANGEL BENITO', 'ALERO', 5, 75);
 
 
-
+/* ESTADISTICAS JUGADORES NACIONAL */
 INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
-VALUES (1, 14.3, 18.5, 3.2, 6.1, 82.5, 54.2, 38.7);
+VALUES (1, 6.4, 5.6, 5.3, 0.4, 40, 37, 53.8);
 INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
-VALUES (2, 11.8, 15.2, 5.4, 2.7, 76.3, 49.8, 41.2);
+VALUES (2, 9.3, 11.3, 2.9, 3.4, 69, 48.7, 39.6);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (3, 12.4, 11.1, 2.4, 1, 70.6, 46.2, 44.6);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (4, 12.3, 13.9, 5.9, 1.3, 67.1, 45.1, 28.6);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (5, 3.2, 2.9, 2.1, 1.2, 54.5, 34.3, 16.7);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (6, 5, 7.5, 4, 0.7, 69.2, 50, 33.3);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (7, 8.4, 7.9, 2.1, 2.3, 65, 35.5, 30.3);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (8, 3.7, 2.2, 2.5, 0.8, 53.3, 34.1, 16);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (9, 3.9, 3.9, 4.8, 0.6, 65, 31.6, 42.9);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (10, 2.5, 1.5, 1.9, 0.6, 100, 50, 10);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (11, 16.2, 17.4, 4.8, 1.5, 61.5, 61, 28.3);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (12, 5, 4.5, 3.8, 0.2, 25, 53.7, 40);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (13, 17.7, 22.1, 8, 1.9, 81, 57.9, 34.5);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (14, 8.6, 7.9, 2.9, 1.1, 77.8, 43.6, 35.4);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (15, 5.6, 10.1, 4.3, 2.4, 70.6, 54.5, 37.5);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (16, 5.8, 9.9, 4, 3.2, 72.7, 56.8, 21.4);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (17, 7.8, 10.3, 5.1, 1.6, 75, 44.6, 21.4);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (18, 1.5, 2.5, 3.1, 1.3, 25, 32, 0);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (19, 9, 7.8, 3, 1.2, 53.8, 59.2, 25.7);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (20, 10.6, 12.1, 7.3, 0.8, 64.7, 49.2, 0);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (21, 3.4, 2.5, 4.8, 0.8, 38.9, 28.6, 25);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (22, 3.9, 4, 2.8, 2.1, 66.7, 37.3, 0);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (23, 5.3, 2.8, 2.4, 0.6, 45.5, 43.6, 28.6);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (24, 2.8, 1.7, 2, 0.3, 50, 45.5, 10);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (25, 9, 3.2, 1.5, 1.1, 64.8, 41.8, 20.5);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (26, 11.7, 11.2, 4.5, 0.8, 73.3, 47.1, 29);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (27, 4.1, 5.1, 5.1, 1.2, 56.5, 33.3, 0);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (28, 4.9, 7.9, 4.3, 2.7, 56.3, 42.1, 25);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (29, 3.8, 0.5, 1.8, 0.8, 100, 22.2, 26.3);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (30, 9.2, 7.6, 4.5, 1, 55.6, 45.5, 43.6);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (31, 4, 6.1, 2.5, 1.2, 80, 81.3, 18.2);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (32, 7.5, 5.2, 3.5, 1.2, 59.1, 33.3, 45.5);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (33, 11.5, 10, 3.9, 2.4, 73.1, 48.6, 26);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (34, 3, 3.5, 1, 2.5, 50, 50, 50);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (35, 5, 2, 5, 0.7, 0, 46.2, 12.5);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (36, 0, 0, 0.5, 1.5, 0, 0, 0);
+INSERT INTO EstadisticasJugadorNac (idJugador, puntos, valoracion, rebotes, asistencias, porLibres, por2Pts, por3Pts)
+VALUES (38, 7.1, 8.8, 5.3, 0.9, 52.2, 43.2, 25.7);
 
-INSERT INTO JugadoresArag (nombre, posicion, idEquipo, dorsal)
-VALUES ('Diego Sánchez', 'Escolta', 1, 9);
-INSERT INTO JugadoresArag (nombre, posicion, idEquipo, dorsal)
-VALUES ('Álvaro Pérez', 'Pívot', 2, 15);
 
+/* ESTADISTICAS JUGADORES ARAGONESA */
 INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
-VALUES (1, 10.7, 2.3, 78.4, 52.1, 34.6);
+VALUES (1, 2.9, 0.2, 50, 0.82, 0.4);
 INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
-VALUES (2, 8.9, 1.8, 71.2, 48.7, 29.3);
+VALUES (2, 19.8, 4.1, 79, 3.3, 3);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (3, 4.8, 1.1, 57.9, 1.1, 0.5);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (4, 3, 0, 0, 1.5, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (5, 2.6, 0.2, 50, 0.8, 0.3);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (6, 5.7, 1.1, 91.7, 1.7, 0.4);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (7, 0, 0, 0, 0, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (8, 7.2, 0.9, 52.9, 1.8, 0.9);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (9, 1.1, 0, 0, 0.4, 0.1);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (10, 5.2, 0.6, 23.8, 1.3, 0.7);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (11, 5, 2, 51.6, 1.5, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (12, 7.8, 0.9, 31.4, 2.6, 0.6);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (13, 6.8, 0.5, 62.5, 3, 0.1);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (14, 1.5, 0.6, 50, 0.3, 0.1);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (15, 4.4, 1.3, 50, 0.6, 0.7);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (16, 8, 0.8, 47.1, 2.7, 0.6);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (17, 0, 0, 0, 0, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (18, 10, 0.8, 57.1, 2.2, 1.6);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (19, 8.1, 1.1, 44, 3.5, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (20, 3.3, 0.4, 37.5, 0.9, 0.4);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (21, 7.4, 2.6, 70.7, 1, 0.9);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (22, 19, 2.8, 78.6, 3.3, 3.3);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (23, 8.1, 1.4, 61.1, 3.4, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (24, 5.8, 0.8, 100, 1.6, 0.6);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (25, 4.1, 1.2, 30.6, 1.4, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (26, 7.7, 0, 0, 1.3, 1.7);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (27, 7.4, 1.3, 52.9, 2, 0.7);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (28, 6, 1.3, 65, 2.2, 0.1);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (29, 2, 0.5, 66.7, 0.8, 0);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (30, 6.5, 0.2, 50, 0.7, 1.7);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (31, 3.3, 0.3, 50, 1, 0.3);
+INSERT INTO EstadisticasJugadorArag (idJugador, puntos, libres, porLibres, dosPts, tresPts)
+VALUES (32, 16.1, 2, 47.6, 3.3, 2.5);
