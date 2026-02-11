@@ -37,7 +37,7 @@ const props = defineProps({
 const currentIndex = ref(1) // Empezamos en 1 porque el primer slide es el clon del último
 const transitioning = ref(false)
 
-// Clonamos el primer y último slide para el efecto infinito
+// Clon del primer y último slide para el efecto infinito
 const allImages = computed(() => {
   const lastImage = props.images[props.images.length - 1]
   const firstImage = props.images[0]
