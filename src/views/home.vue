@@ -1,19 +1,20 @@
 <template>
   <div>
-    <!-- SLIDER -->
     <Slider :images="sliderImages" />
 
-    <!-- GAME CARDS -->
     <main class="games">
-      <h2 class="games__title">Próximos partidos:</h2>
+      <h2 class="games__title">Nuestros Equipos:</h2>
 
-      <div class="cards">
+      <div v-if="loading" class="loading">Cargando equipos...</div>
+      <div v-else-if="error" class="error">{{ error }}</div>
+
+      <div v-else class="cards">
         <GameCard
-          v-for="(game, index) in upcomingGames"
-          :key="index"
-          :image="game.image"
-          :alt="game.alt"
-          :link="game.link"
+          v-for="(team, index) in teams"
+          :key="team.id || team.Id"
+          :image="getTeamImage(index)" 
+          :alt="team.nombre"
+          :link="'/equipo/' + (team.id || team.Id)"
         />
       </div>
     </main>
@@ -21,9 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import Slider from '@/components/Slider.vue'
-import GameCard from '@/components/GameCard.vue'
+import { ref, onMounted } from 'vue'
+import Slider from '../components/Slider.vue'
+import GameCard from '../components/GameCard.vue'
+import { useTeams } from '../composables/useTeams'
+
+const { teams, loading, error, fetchTeams } = useTeams()
 
 const sliderImages = ref([
   '/img/slider1.jpg',
@@ -31,35 +35,35 @@ const sliderImages = ref([
   '/img/slider3.jpg'
 ])
 
-const upcomingGames = ref([
-  {
-    image: '/img/a1.png',
-    alt: 'A1',
-    link: '/equipo/nacA1Masc'
-  },
-  {
-    image: '/img/a2fem.png',
-    alt: 'A2 Femenino',
-    link: '/equipo/nacA2Fem'
-  },
-  {
-    image: '/img/a1.png',
-    alt: '3a Aragón',
-    link: '/equipo/3Arag'
-  },
-  {
-    image: '/img/3a.png',
-    alt: '3a División',
-    link: '/equipo/3Arag'
-  },
-  {
-    image: '/img/a1.png',
-    alt: 'A1',
-    link: '/equipo/nacA1Masc'
-  }
-])
+// Array con tus 5 fotos diferentes de categorías
+const categoryImages = [
+  '/img/nacA1.png',
+  '/img/nacA2F.png',
+  '/img/nacA2M.png',
+  '/img/segunda.png',
+  '/img/tercera.png'
+]
+
+/**
+ * Función para asignar una foto diferente según el orden del equipo
+ */
+const getTeamImage = (index: number) => {
+  // Usamos el operador módulo % para que si hay más de 5 equipos, 
+  // vuelva a empezar por la primera foto y no de error.
+  return categoryImages[index % categoryImages.length]
+}
+
+onMounted(async () => {
+  await fetchTeams()
+})
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/main.scss';
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+}
+.error { color: red; }
 </style>
