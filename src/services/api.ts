@@ -1,5 +1,5 @@
 // src/services/api.ts
-const BASE_URL = 'https://localhost:7278/api';
+const BASE_URL = 'https://localhost:7278'; // Sin el /api al final para manejarlo en los endpoints
 
 export const apiFetch = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
   const url = `${BASE_URL}${endpoint}`;

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-import Team from '../views/Team.vue'
-import Player from '../views/Player.vue'
+import Home from '../views/home.vue'
+import Team from '../views/team.vue'
+import Player from '../views/player.vue'
 import FormularioJugador from '../views/formularioJugador.vue'
 import FormularioPatrocinador from '../views/formularioPatrocinador.vue'
 

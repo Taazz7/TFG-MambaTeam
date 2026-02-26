@@ -5,22 +5,24 @@ import { apiFetch } from '../services/api';
 export interface Player {
   id?: number;
   nombre: string;
-  posicion?: string;
-  imagen?: string;
+  apellidos: string;
+  posicion: string;
+  dorsal: number;
+  fotoUrl?: string;
 }
 
 export function usePlayers() {
   const players = ref<Player[]>([]);
   const loading = ref(false);
-  // Solución al error de la imagen: definimos que puede ser string o null
+  // SOLUCIÓN AL ERROR DE TU IMAGEN: Tipamos como string o null
   const error = ref<string | null>(null);
 
-  const fetchPlayers = async () => {
+  const fetchPlayers = async (type: 'JugadoresA' | 'JugadoresNac') => {
     loading.value = true;
-    error.value = null;
+    error.value = null; 
     try {
-      // Usamos apiFetch (que es lo que exportamos en api.ts)
-      const data = await apiFetch<Player[]>('/Jugadores');
+      // Usamos el formato /api/JugadoresA o /api/JugadoresNac según tu Swagger
+      const data = await apiFetch<Player[]>(`/api/${type}`);
       players.value = data;
     } catch (err: any) {
       error.value = "No se pudieron cargar los jugadores";

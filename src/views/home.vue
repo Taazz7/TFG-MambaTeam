@@ -1,11 +1,9 @@
 <template>
   <div>
-    <!-- SLIDER -->
     <Slider :images="sliderImages" />
 
-    <!-- GAME CARDS -->
     <main class="games">
-      <h2 class="games__title">Próximos partidos:</h2>
+      <h2 class="games__title">Nuestros Equipos:</h2>
 
       <div class="cards">
         <GameCard
@@ -22,40 +20,22 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Slider from '../components/Slider.vue'
-import GameCard from '../components/GameCard.vue'
+// Solución a los errores de import: extensión .vue y rutas relativas
+import Slider from '../components/slider.vue'
+import GameCard from '../components/gameCard.vue'
 
-const sliderImages = ref([
-  '/img/slider1.jpg',
-  '/img/slider2.jpg',
-  '/img/slider3.jpg'
-])
+const sliderImages = ref(['/img/slider1.jpg', '/img/slider2.jpg', '/img/slider3.jpg'])
 
 const upcomingGames = ref([
   {
     image: '/img/a1.png',
-    alt: 'A1',
-    link: '/equipo/nacA1Masc'
+    alt: 'Nacional A1',
+    link: '/equipo/JugadoresA' // Usamos el nombre del endpoint como parámetro
   },
   {
     image: '/img/a2fem.png',
-    alt: 'A2 Femenino',
-    link: '/equipo/nacA2Fem'
-  },
-  {
-    image: '/img/a1.png',
-    alt: '3a Aragón',
-    link: '/equipo/3Arag'
-  },
-  {
-    image: '/img/3a.png',
-    alt: '3a División',
-    link: '/equipo/3Arag'
-  },
-  {
-    image: '/img/a1.png',
-    alt: 'A1',
-    link: '/equipo/nacA1Masc'
+    alt: 'Nacional A2 Femenino',
+    link: '/equipo/JugadoresNac'
   }
 ])
 </script>
