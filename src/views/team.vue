@@ -26,8 +26,8 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import PlayerCard from '@/components/PlayerCard.vue'
-import Dropdown from '@/components/Dropdown.vue'
+import PlayerCard from '../components/PlayerCard.vue'
+import Dropdown from '../components/Dropdown.vue'
 
 const route = useRoute()
 const router = useRouter()

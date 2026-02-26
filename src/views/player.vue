@@ -1,20 +1,41 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { api } from '../services/api'
+// Importamos la función correcta que definimos en api.ts
+import { apiFetch } from '../services/api';
 
 const route = useRoute()
 const playerId = Number(route.params.id)
 
-const player = ref<any>(null)
+// Definimos una interfaz rápida para tener autocompletado y evitar el "any"
+interface Player {
+  nombre: string;
+  apellidos: string;
+  fotoUrl?: string;
+  edad: number;
+  posicion: string;
+  dorsal: number;
+  equipo?: {
+    nombre: string;
+  };
+}
+
+const player = ref<Player | null>(null)
 const loading = ref(true)
 const error = ref<string | null>(null)
 
 onMounted(async () => {
   try {
     loading.value = true
-    player.value = await api.getPlayerById(playerId)
+    error.value = null
+    
+    // CORRECCIÓN AQUÍ: 
+    // Usamos apiFetch directamente pasándole el endpoint.
+    // Ajusta '/Jugadores/' si en tu Swagger el nombre es distinto (ej. /Players/)
+    player.value = await apiFetch<Player>(`/Jugadores/${playerId}`)
+    
   } catch (err: any) {
+    console.error(err)
     error.value = err.message || 'Error al cargar el jugador'
   } finally {
     loading.value = false
@@ -24,10 +45,10 @@ onMounted(async () => {
 
 <template>
   <div class="player-page">
-    <div v-if="loading">Cargando jugador...</div>
-    <div v-else-if="error">{{ error }}</div>
+    <div v-if="loading" class="loading">Cargando jugador...</div>
+    <div v-else-if="error" class="error">{{ error }}</div>
 
-    <div v-else class="player-card">
+    <div v-else-if="player" class="player-card">
       <h1>{{ player.nombre }} {{ player.apellidos }}</h1>
 
       <img
@@ -36,29 +57,18 @@ onMounted(async () => {
         class="player-photo"
       />
 
-      <p><strong>Edad:</strong> {{ player.edad }}</p>
-      <p><strong>Posición:</strong> {{ player.posicion }}</p>
-      <p><strong>Dorsal:</strong> {{ player.dorsal }}</p>
-      <p><strong>Equipo:</strong> {{ player.equipo?.nombre }}</p>
+      <div class="info">
+        <p><strong>Edad:</strong> {{ player.edad }}</p>
+        <p><strong>Posición:</strong> {{ player.posicion }}</p>
+        <p><strong>Dorsal:</strong> {{ player.dorsal }}</p>
+        <p v-if="player.equipo"><strong>Equipo:</strong> {{ player.equipo.nombre }}</p>
+      </div>
 
-      <!-- Añade aquí más campos según tu API -->
+      <router-link to="/">Volver al inicio</router-link>
     </div>
   </div>
 </template>
 
 <style scoped>
-.player-page {
-  padding: 20px;
-}
 
-.player-card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.player-photo {
-  width: 200px;
-  border-radius: 10px;
-}
 </style>

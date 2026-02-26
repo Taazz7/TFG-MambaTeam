@@ -22,8 +22,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Slider from '@/components/Slider.vue'
-import GameCard from '@/components/GameCard.vue'
+import Slider from '../components/Slider.vue'
+import GameCard from '../components/GameCard.vue'
 
 const sliderImages = ref([
   '/img/slider1.jpg',
