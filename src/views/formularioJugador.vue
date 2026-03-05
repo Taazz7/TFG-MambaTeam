@@ -40,6 +40,7 @@
             <div class="form-group">
               <label for="dni" class="form-label">DNI/NIE <span class="campo-requerido">*</span></label>
               <input type="text" id="dni" v-model="formData.dni" class="form-input" placeholder="12345678A" maxlength="9" required />
+              <span v-if="errors.dni" class="error-message">{{ errors.dni }}</span>
             </div>
           </div>
         </div>
@@ -50,6 +51,7 @@
             <div class="form-group">
               <label for="email" class="form-label">Email <span class="campo-requerido">*</span></label>
               <input type="email" id="email" v-model="formData.email" class="form-input" placeholder="jugador@ejemplo.com" required />
+              <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
             </div>
             <div class="form-group">
               <label for="telefono" class="form-label">Teléfono <span class="campo-requerido">*</span></label>
@@ -102,7 +104,7 @@
         <div class="formulario-footer">
           <button type="button" @click="handleCancel" class="btn btn-secondary">Cancelar</button>
           <button type="submit" class="btn btn-primary" :disabled="isSubmitting">
-            <span v-if="isSubmitting">Enviando...</span>
+            <span v-if="isSubmitting">Enviando Correo...</span>
             <span v-else>Registrar y Enviar</span>
           </button>
         </div>
@@ -129,20 +131,42 @@ const formData = reactive({
   telefono: '',
   posicion: '',
   altura: null,
-  observaciones: '' // Asegúrate de que esto esté aquí para el v-model
+  observaciones: ''
 });
 
 const validateForm = () => {
   const newErrors = {};
+  
+  // Validación Nombre y Apellidos
   if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
   if (!formData.apellidos.trim()) newErrors.apellidos = 'Los apellidos son obligatorios';
-  // ... resto de tus validaciones
+  
+  // Validación DNI (Formato estándar España)
+  const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+  if (!formData.dni.trim()) {
+    newErrors.dni = 'El DNI es obligatorio';
+  } else if (!dniRegex.test(formData.dni)) {
+    newErrors.dni = 'Formato de DNI inválido';
+  }
+
+  // Validación Email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!formData.email.trim()) {
+    newErrors.email = 'El email es obligatorio';
+  } else if (!emailRegex.test(formData.email)) {
+    newErrors.email = 'Email no válido';
+  }
+
+  // Limpiar errores anteriores y asignar nuevos
+  Object.keys(errors).forEach(key => delete errors[key]);
   Object.assign(errors, newErrors);
+  
   return Object.keys(newErrors).length === 0;
 };
 
 const handleSubmit = async () => {
   if (!validateForm()) return;
+  
   isSubmitting.value = true;
 
   const templateParams = {
@@ -157,25 +181,35 @@ const handleSubmit = async () => {
   };
 
   try {
-    await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_PUBLIC_KEY');
-    alert('¡Registro enviado con éxito!');
+    await emailjs.send(
+      'service_36h5xbz',      // Tu Service ID
+      'template_feml7qp',     // RECUERDA CAMBIAR ESTO por tu Template ID de EmailJS
+      templateParams,
+      'd3nd1Xg1EDGHddK67'     // Tu Public Key
+    );
+
+    alert('¡Registro enviado con éxito! Nos pondremos en contacto contigo pronto.');
     router.push('/jugadores');
   } catch (error) {
-    console.error('Error:', error);
-    alert('Error al enviar el formulario.');
+    console.error('Error al enviar:', error);
+    alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
   } finally {
     isSubmitting.value = false;
   }
 };
 
-const handleCancel = () => { if (confirm('¿Cancelar?')) router.push('/jugadores'); };
+const handleCancel = () => { 
+  if (confirm('¿Estás seguro de que quieres cancelar el registro?')) {
+    router.push('/jugadores');
+  }
+};
 </script>
 
 <style scoped>
-/* (Estilos anteriores se mantienen igual) */
 .formulario-container { min-height: 100vh; padding: 2rem; background: #f3f3f3; }
 .formulario-card { max-width: 900px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow: hidden; }
 .formulario-header { padding: 2rem; background: #611979; color: #F4FA57; text-align: center; }
+.formulario-titulo { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
 .formulario-body { padding: 2rem; }
 .seccion-formulario { margin-bottom: 2rem; }
 .seccion-titulo { font-size: 1.25rem; font-weight: 600; color: #333; margin-bottom: 1.5rem; border-bottom: 2px solid #611979; padding-bottom: 5px; }
@@ -184,7 +218,6 @@ const handleCancel = () => { if (confirm('¿Cancelar?')) router.push('/jugadores
 .form-label { font-size: 0.875rem; font-weight: 600; color: #555; margin-bottom: 0.5rem; }
 .campo-requerido { color: #e53e3e; }
 
-/* Estilos de inputs unificados */
 .form-input, .form-textarea {
   padding: 0.75rem;
   border: 2px solid #e2e8f0;
@@ -194,11 +227,11 @@ const handleCancel = () => { if (confirm('¿Cancelar?')) router.push('/jugadores
   transition: all 0.3s ease;
   outline: none;
   width: 100%;
-  box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+  box-sizing: border-box;
 }
 
 .form-textarea {
-  resize: vertical; /* Permite al usuario estirarlo solo hacia abajo */
+  resize: vertical;
   min-height: 100px;
   font-family: inherit;
 }
@@ -214,9 +247,13 @@ const handleCancel = () => { if (confirm('¿Cancelar?')) router.push('/jugadores
   box-shadow: 0 0 0 3px rgba(97, 25, 121, 0.1);
 }
 
+.error-message { color: #e53e3e; font-size: 0.8rem; margin-top: 0.3rem; }
+
 .formulario-footer { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem; border-top: 1px solid #eee; padding-top: 2rem; }
-.btn { padding: 0.75rem 2rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: none; }
+.btn { padding: 0.75rem 2rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: none; transition: background 0.2s; }
 .btn-primary { background: #611979; color: white; }
+.btn-primary:hover { background: #4a125c; }
+.btn-primary:disabled { background: #a0aec0; cursor: not-allowed; }
 .btn-secondary { background: #e2e8f0; color: #4a5568; }
 
 @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
