@@ -12,7 +12,7 @@
       <div v-if="loading" class="loading">Cargando estadísticas...</div>
 
       <div v-else-if="playerData" class="player__content">
-        <div class="player__left">       
+        <div class="player__left" style="margin-top: 80px;">       
           <img 
             :src="formatPlayerImage(playerData.nombre)" 
             :alt="playerData.nombre" 
@@ -55,7 +55,7 @@ const allPlayers = ref([])
 const loading = ref(true)
 
 const teamNames = {
-  1: 'NACIONAL A1', 2: 'NACIONAL A2 MASCULINO', 3: 'NACIONAL A2 FEMENINO',
+  1: 'NACIONAL A1', 2: 'NACIONAL A2 FEMENINO', 3: 'NACIONAL A2 MASCULINO',
   4: '2ª ARAGONESA', 5: '3ª ARAGONESA'
 }
 
@@ -105,14 +105,12 @@ const loadPlayerData = async (compositeId) => {
   }
 }
 
-// Mapeo diferenciado según el origen del jugador (Nacional vs Aragonesa)
 const mappedStats = computed(() => {
   if (!playerData.value) return []
   const d = playerData.value
   const [type] = selectedPlayerId.value.split('-')
 
   if (type === 'Nac') {
-    // Estructura para JugadoresNac
     return [
       { label: 'PUNTOS POR PARTIDO', value: d.puntos || '0' },
       { label: 'VALORACIÓN', value: d.valoracion || '0' },
@@ -123,7 +121,6 @@ const mappedStats = computed(() => {
       { label: '% TIROS 3PTS', value: `${d.por3Pts || 0}%` }
     ]
   } else {
-    // Estructura para JugadoresA según Swagger
     return [
       { label: 'PUNTOS POR PARTIDO', value: d.puntos || '0' },
       { label: 'TIROS LIBRES', value: d.libres || '0' },
@@ -150,3 +147,13 @@ onMounted(async () => {
   loadPlayerData(selectedPlayerId.value)
 })
 </script>
+
+<style lang="scss" scoped>
+@import '@/styles/main.scss';
+
+.player-header {
+  padding: $spacing-xl $spacing-sm $spacing-lg;
+  display: flex;
+  justify-content: center;
+}
+</style>
