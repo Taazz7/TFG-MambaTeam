@@ -132,7 +132,17 @@ const mappedStats = computed(() => {
 })
 
 const playerOptions = computed(() => allPlayers.value)
-const formatPlayerImage = (name) => `/src/assets/img/${name}.png`
+
+/**
+ * MODIFICACIÓN AQUÍ:
+ * Añadimos "-BG" al nombre del archivo y limpiamos espacios.
+ */
+const formatPlayerImage = (name) => {
+  if (!name) return '/src/assets/img/logo.png'
+  const cleanName = name.trim().toUpperCase()
+  return `/src/assets/img/${cleanName}-BG.png`
+}
+
 const formatTeamName = (id) => teamNames[id] || `Equipo ${id}`
 
 watch(selectedPlayerId, (newId) => {
