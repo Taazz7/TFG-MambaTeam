@@ -12,13 +12,14 @@
     
     <div v-else-if="teamData">
       <h2 class="Subtitulo">{{ teamData.nombre }}</h2>
-      <h2 class="Subtitulo">Record: {{ teamData.victorias }}V - {{ teamData.derrotas }}D</h2>
+      <h2 class="Subtitulo">Récord: {{ teamData.victorias }}V - {{ teamData.derrotas }}D</h2>
       
       <div class="cards-container">
         <PlayerCard
           v-for="player in players"
           :key="player.id"
           :player-id="player.id"
+          :player-category="selectedCategory"
           :player-image="formatPlayerImage(player.nombre)"
           :player-name="player.nombre"
         />
@@ -43,19 +44,18 @@ const teamData = ref(null)
 const players = ref([])
 const loading = ref(true)
 
-// Mapeo de categorías a IDs de la API
 const categoryMap = {
   'nacA1Masc': 1,
-  'nacA2Masc': 2,
-  'nacA2Fem': 3,
+  'nacA2Fem': 2,
+  'nacA2Masc': 3,
   '2Arag': 4,
   '3Arag': 5
 }
 
 const categoryOptions = [
   { value: 'nacA1Masc', label: 'Nacional A1 Masculino' },
-  { value: 'nacA2Masc', label: 'Nacional A2 Masculino' },
   { value: 'nacA2Fem', label: 'Nacional A2 Femenino' },
+  { value: 'nacA2Masc', label: 'Nacional A2 Masculino' },
   { value: '2Arag', label: '2ª Aragonesa' },
   { value: '3Arag', label: '3ª Aragonesa' }
 ]
@@ -67,18 +67,10 @@ const loadTeamData = async (categoryKey) => {
   const teamId = categoryMap[categoryKey] || 1
   
   try {
-    // 1. Datos del equipo
     teamData.value = await fetchData(`/Equipo/${teamId}`)
-
-    // 2. Datos de los jugadores
-    const playerEndpoint = teamId <= 3 ? `/JugadoresNac` : `/JugadoresA`
-    const response = await fetchData(`${playerEndpoint}/${teamId}`)
-    
-    /* IMPORTANTE: Si tu API devuelve un objeto único por ID de equipo en lugar de una lista,
-       asegúrate de que el endpoint del backend devuelva un Array (List<Jugador>).
-       Aquí forzamos que sea Array para que el .map() no falle.
-    */
-    const rawPlayers = Array.isArray(response) ? response : [response]
+    const playerPath = teamId <= 3 ? 'JugadoresNac' : 'JugadoresA'
+    const response = await fetchData(`/${playerPath}/equipo/${teamId}`)
+    const rawPlayers = Array.isArray(response) ? response : []
     
     players.value = rawPlayers.map(p => ({
       id: p.jugadorNacId || p.jugadorAId || p.id,
@@ -86,15 +78,17 @@ const loadTeamData = async (categoryKey) => {
     }))
 
   } catch (error) {
-    console.error("Error cargando equipo:", error)
+    console.error("Error cargando equipo o jugadores:", error)
     players.value = []
+    teamData.value = null
   } finally {
     loading.value = false
   }
 }
 
 const formatPlayerImage = (name) => {
-  return `/src/assets/img/${name}.png`
+  const formattedName = name ? name.trim().toUpperCase() : 'default'
+  return `/src/assets/img/${formattedName}.png`
 }
 
 watch(selectedCategory, (newCat) => {
@@ -106,3 +100,12 @@ onMounted(() => {
   loadTeamData(selectedCategory.value)
 })
 </script>
+
+<style scoped>
+.team-header {
+  margin-top: 50px; /* Margen para separar del header */
+  display: flex;
+  justify-content: center;
+}
+
+</style>
