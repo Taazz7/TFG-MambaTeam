@@ -8,118 +8,101 @@
       />
     </div>
 
-    <h2 class="Subtitulo">{{ teamData.name }}</h2>
-    <h2 class="Subtitulo">Record: {{ teamData.record }}</h2>
+    <div v-if="loading" class="loading">Cargando datos del equipo...</div>
     
-    <div class="cards-container">
-      <PlayerCard
-        v-for="player in teamData.players"
-        :key="player.id"
-        :player-id="player.id"
-        :player-image="player.image"
-        :player-name="player.name"
-      />
+    <div v-else-if="teamData">
+      <h2 class="Subtitulo">{{ teamData.nombre }}</h2>
+      <h2 class="Subtitulo">Record: {{ teamData.victorias }}V - {{ teamData.derrotas }}D</h2>
+      
+      <div class="cards-container">
+        <PlayerCard
+          v-for="player in players"
+          :key="player.id"
+          :player-id="player.id"
+          :player-image="formatPlayerImage(player.nombre)"
+          :player-name="player.nombre"
+        />
+      </div>
     </div>
+    
+    <div v-else class="loading">No se encontraron datos para este equipo.</div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import PlayerCard from '@/components/PlayerCard.vue'
-import Dropdown from '@/components/Dropdown.vue'
+import { fetchData } from '@/config/api'
+import PlayerCard from '@/components/playerCard.vue'
+import Dropdown from '@/components/dropDown.vue'
 
 const route = useRoute()
 const router = useRouter()
 
-const props = defineProps({
-  categoria: {
-    type: String,
-    default: 'nacA1Masc'
-  }
-})
+const teamData = ref(null)
+const players = ref([])
+const loading = ref(true)
 
-// Datos de equipos (esto debería venir de una API)
-const teams = {
-  nacA1Masc: {
-    name: 'Nacional A1 Masculino',
-    record: '9V 3D',
-    players: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `Jugador ${i + 1}`,
-      image: `/img/${i + 1}.png`
-    }))
-  },
-  nacA2Masc: {
-    name: 'Nacional A2 Masculino',
-    record: '4V 6D',
-    players: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `Jugador ${i + 1}`,
-      image: `/img/${i + 1}.png`
-    }))
-  },
-  nacA2Fem: {
-    name: 'Nacional A2 Femenino',
-    record: '13V 0D',
-    players: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `Jugador ${i + 1}`,
-      image: `/img/${i + 1}.png`
-    }))
-  },
-  '2Arag': {
-    name: '2ª Aragonesa',
-    record: '7V 5D',
-    players: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `Jugador ${i + 1}`,
-      image: `/img/${i + 1}.png`
-    }))
-  },
-  '3Arag': {
-    name: '3ª Aragonesa',
-    record: '9V 1D',
-    players: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `Jugador ${i + 1}`,
-      image: `/img/${i + 1}.png`
-    }))
-  }
+// Mapeo de categorías a IDs de la API
+const categoryMap = {
+  'nacA1Masc': 1,
+  'nacA2Masc': 2,
+  'nacA2Fem': 3,
+  '2Arag': 4,
+  '3Arag': 5
 }
 
-// Opciones para el dropdown
-const categoryOptions = computed(() => [
+const categoryOptions = [
   { value: 'nacA1Masc', label: 'Nacional A1 Masculino' },
   { value: 'nacA2Masc', label: 'Nacional A2 Masculino' },
   { value: 'nacA2Fem', label: 'Nacional A2 Femenino' },
   { value: '2Arag', label: '2ª Aragonesa' },
   { value: '3Arag', label: '3ª Aragonesa' }
-])
+]
 
-const selectedCategory = ref(props.categoria || route.params.categoria || 'nacA1Masc')
-const currentCategory = computed(() => selectedCategory.value)
-const teamData = computed(() => teams[currentCategory.value] || teams.nacA1Masc)
+const selectedCategory = ref(route.params.categoria || 'nacA1Masc')
 
-// Actualizar la URL cuando cambia la selección
-watch(selectedCategory, (newCategory) => {
-  router.push(`/equipo/${newCategory}`)
+const loadTeamData = async (categoryKey) => {
+  loading.value = true
+  const teamId = categoryMap[categoryKey] || 1
+  
+  try {
+    // 1. Datos del equipo
+    teamData.value = await fetchData(`/Equipo/${teamId}`)
+
+    // 2. Datos de los jugadores
+    const playerEndpoint = teamId <= 3 ? `/JugadoresNac` : `/JugadoresA`
+    const response = await fetchData(`${playerEndpoint}/${teamId}`)
+    
+    /* IMPORTANTE: Si tu API devuelve un objeto único por ID de equipo en lugar de una lista,
+       asegúrate de que el endpoint del backend devuelva un Array (List<Jugador>).
+       Aquí forzamos que sea Array para que el .map() no falle.
+    */
+    const rawPlayers = Array.isArray(response) ? response : [response]
+    
+    players.value = rawPlayers.map(p => ({
+      id: p.jugadorNacId || p.jugadorAId || p.id,
+      nombre: p.nombre
+    }))
+
+  } catch (error) {
+    console.error("Error cargando equipo:", error)
+    players.value = []
+  } finally {
+    loading.value = false
+  }
+}
+
+const formatPlayerImage = (name) => {
+  return `/src/assets/img/${name}.png`
+}
+
+watch(selectedCategory, (newCat) => {
+  router.push(`/equipo/${newCat}`)
+  loadTeamData(newCat)
 })
 
-// Actualizar cuando cambia la categoría en la URL
-watch(() => route.params.categoria, (newCategory) => {
-  if (newCategory && newCategory !== selectedCategory.value) {
-    selectedCategory.value = newCategory
-  }
+onMounted(() => {
+  loadTeamData(selectedCategory.value)
 })
 </script>
-
-<style lang="scss" scoped>
-@import '@/styles/main.scss';
-
-.team-header {
-  padding: $spacing-xl $spacing-sm $spacing-lg;
-  display: flex;
-  justify-content: center;
-}
-</style>
