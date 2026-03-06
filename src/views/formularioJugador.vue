@@ -205,56 +205,10 @@ const handleCancel = () => {
 };
 </script>
 
-<style scoped>
-.formulario-container { min-height: 100vh; padding: 2rem; background: #f3f3f3; }
-.formulario-card { max-width: 900px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow: hidden; }
-.formulario-header { padding: 2rem; background: #611979; color: #F4FA57; text-align: center; }
-.formulario-titulo { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-.formulario-body { padding: 2rem; }
-.seccion-formulario { margin-bottom: 2rem; }
-.seccion-titulo { font-size: 1.25rem; font-weight: 600; color: #333; margin-bottom: 1.5rem; border-bottom: 2px solid #611979; padding-bottom: 5px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
-.form-group { display: flex; flex-direction: column; }
-.form-label { font-size: 0.875rem; font-weight: 600; color: #555; margin-bottom: 0.5rem; }
-.campo-requerido { color: #e53e3e; }
+<style lang="scss" scoped>
+@import '@/styles/main.scss';
 
-.form-input, .form-textarea {
-  padding: 0.75rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
-  color: #333;
-  transition: all 0.3s ease;
-  outline: none;
-  width: 100%;
-  box-sizing: border-box;
+.input-placeholder { 
+  color: #a0aec0 !important; 
 }
-
-.form-textarea {
-  resize: vertical;
-  min-height: 100px;
-  font-family: inherit;
-}
-
-.form-input::placeholder, .form-textarea::placeholder {
-  color: #a0aec0;
-}
-
-.input-placeholder { color: #a0aec0 !important; }
-
-.form-input:focus, .form-textarea:focus {
-  border-color: #611979;
-  box-shadow: 0 0 0 3px rgba(97, 25, 121, 0.1);
-}
-
-.error-message { color: #e53e3e; font-size: 0.8rem; margin-top: 0.3rem; }
-
-.formulario-footer { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem; border-top: 1px solid #eee; padding-top: 2rem; }
-.btn { padding: 0.75rem 2rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: none; transition: background 0.2s; }
-.btn-primary { background: #611979; color: white; }
-.btn-primary:hover { background: #4a125c; }
-.btn-primary:disabled { background: #a0aec0; cursor: not-allowed; }
-.btn-secondary { background: #e2e8f0; color: #4a5568; }
-
-@media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
 </style>

@@ -297,162 +297,28 @@ const handleCancel = () => {
 };
 </script>
 
-<style scoped>
-.formulario-container {
-  min-height: 100vh;
-  padding: 2rem;
-  background: #f3f3f3;
+<style lang="scss" scoped>
+@import '@/styles/main.scss';
+
+.formulario-header {
+  background: $color-light; // Fondo amarillo
+  color: $color-primary;    // Texto lila
+  
+  .formulario-titulo {
+    font-weight: 700;
+  }
 }
 
 .formulario-card {
-  max-width: 900px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-.formulario-header {
-  padding: 2rem;
-  background: #F4FA57;
-  color: #611979;
-  text-align: center;
-}
-
-.formulario-titulo {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-}
-
-.formulario-subtitulo {
-  font-size: 1rem;
-  opacity: 0.9;
-  margin: 0;
-}
-
-.formulario-body {
-  padding: 2rem;
 }
 
 .seccion-formulario {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
   border-bottom: 2px solid #f0f0f0;
-}
-
-.seccion-formulario:last-of-type {
-  border-bottom: none;
-}
-
-.seccion-titulo {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #611979;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
-}
-
-.form-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 0.5rem;
-}
-
-.campo-requerido {
-  color: #e53e3e;
-}
-
-.form-input,
-.form-textarea {
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-family: inherit;
-}
-
-.form-input:focus,
-.form-textarea:focus {
-  outline: none;
-  border-color: #611979;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.error-message {
-  font-size: 0.75rem;
-  color: #e53e3e;
-  margin-top: 0.25rem;
-}
-
-.formulario-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 2px solid #f0f0f0;
-}
-
-.btn {
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background: #611979;
-  color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-}
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background: #e2e8f0;
-  color: #333;
-}
-
-.btn-secondary:hover {
-  background: #cbd5e0;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .formulario-body {
-    padding: 1.5rem;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  padding-bottom: $spacing-lg;
+  
+  &:last-of-type {
+    border-bottom: none;
   }
 }
 </style>
