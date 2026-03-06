@@ -7,7 +7,6 @@
       </div>
 
       <form @submit.prevent="handleSubmit" class="formulario-body">
-        <!-- Información de la Empresa -->
         <div class="seccion-formulario">
           <h3 class="seccion-titulo">Información de la Empresa</h3>
           
@@ -80,7 +79,6 @@
           </div>
         </div>
 
-        <!-- Información de Contacto -->
         <div class="seccion-formulario">
           <h3 class="seccion-titulo">Información de Contacto</h3>
           
@@ -126,10 +124,8 @@
               placeholder="https://www.empresa.com"
             />
           </div>
-
         </div>
 
-        <!-- Información del Patrocinio -->
         <div class="seccion-formulario">
           <h3 class="seccion-titulo">Información del Patrocinio</h3>
           
@@ -164,7 +160,6 @@
           </div>
         </div>
 
-        <!-- Botones de Acción -->
         <div class="formulario-footer">
           <button 
             type="button" 
@@ -178,7 +173,7 @@
             class="btn btn-primary"
             :disabled="isSubmitting"
           >
-            <span v-if="isSubmitting">Guardando...</span>
+            <span v-if="isSubmitting">Enviando...</span>
             <span v-else>Registrar Patrocinador</span>
           </button>
         </div>
@@ -190,8 +185,14 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import emailjs from '@emailjs/browser'; // Importación necesaria
 
 const router = useRouter();
+
+// CONFIGURACIÓN DE EMAILJS
+const SERVICE_ID = 'service_36h5xbz'; // Asegúrate de que este ID coincida con tu servicio en EmailJS
+const TEMPLATE_ID = 'template_paij3uo'; // Asegúrate de que este ID coincida con tu plantilla en EmailJS
+const PUBLIC_KEY = 'd3nd1Xg1EDGHddK67'; // Tu clave pública de EmailJS
 
 const formData = reactive({
   nombreEmpresa: '',
@@ -249,7 +250,6 @@ const validateForm = () => {
 
 const handleSubmit = async () => {
   if (!validateForm()) {
-    // Scroll al primer error
     const firstError = document.querySelector('.error-message');
     if (firstError) {
       firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -260,28 +260,31 @@ const handleSubmit = async () => {
   isSubmitting.value = true;
   
   try {
-    // Aquí iría la lógica para enviar los datos al backend
-    // Crear FormData para enviar archivos
-    const submitData = new FormData();
+    // Enviamos los datos directamente a EmailJS
+    await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      {
+        nombreEmpresa: formData.nombreEmpresa,
+        cif: formData.cif,
+        sector: formData.sector,
+        descripcion: formData.descripcion,
+        email: formData.email,
+        telefono: formData.telefono,
+        web: formData.web,
+        importe: formData.importe,
+        beneficios: formData.beneficios,
+        fecha: new Date().toLocaleDateString()
+      },
+      PUBLIC_KEY
+    );
     
-    Object.keys(formData).forEach(key => {
-      if (key !== 'logoPreview' && formData[key] !== null) {
-        submitData.append(key, formData[key]);
-      }
-    });
-    
-    console.log('Datos del formulario:', formData);
-    
-    // Simulación de llamada API
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Redirigir a la lista de patrocinadores o mostrar mensaje de éxito
-    alert('Patrocinador registrado exitosamente');
-    router.push('/patrocinadores'); // Ajusta esta ruta según tu aplicación
+    alert('Solicitud de patrocinio enviada con éxito. Revisaremos la información y te contactaremos.');
+    router.push('/'); 
     
   } catch (error) {
-    console.error('Error al registrar patrocinador:', error);
-    alert('Error al registrar el patrocinador. Por favor, intenta de nuevo.');
+    console.error('Error EmailJS:', error);
+    alert('No se pudo enviar el formulario. Por favor, intenta de nuevo más tarde.');
   } finally {
     isSubmitting.value = false;
   }
@@ -289,7 +292,7 @@ const handleSubmit = async () => {
 
 const handleCancel = () => {
   if (confirm('¿Estás seguro de que quieres cancelar? Se perderán los datos ingresados.')) {
-    router.push('/patrocinadores'); // Ajusta esta ruta según tu aplicación
+    router.push('/');
   }
 };
 </script>
@@ -393,35 +396,6 @@ const handleCancel = () => {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.form-input-file {
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  border: 2px dashed #e2e8f0;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.form-help {
-  font-size: 0.75rem;
-  color: #718096;
-  margin-top: 0.25rem;
-}
-
-.logo-preview {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f7fafc;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.logo-preview img {
-  max-width: 300px;
-  max-height: 200px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 .error-message {
   font-size: 0.75rem;
   color: #e53e3e;
@@ -473,21 +447,12 @@ const handleCancel = () => {
 }
 
 @media (max-width: 768px) {
-  .formulario-container {
-    padding: 1rem;
-  }
-  
   .formulario-body {
     padding: 1.5rem;
   }
-  
   .form-row {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-  
-  .formulario-titulo {
-    font-size: 1.5rem;
   }
 }
 </style>

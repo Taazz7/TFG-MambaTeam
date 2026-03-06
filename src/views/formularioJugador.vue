@@ -189,7 +189,7 @@ const handleSubmit = async () => {
     );
 
     alert('¡Registro enviado con éxito! Nos pondremos en contacto contigo pronto.');
-    router.push('/jugadores');
+    router.push('/');
   } catch (error) {
     console.error('Error al enviar:', error);
     alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
@@ -200,7 +200,7 @@ const handleSubmit = async () => {
 
 const handleCancel = () => { 
   if (confirm('¿Estás seguro de que quieres cancelar el registro?')) {
-    router.push('/jugadores');
+    router.push('/');
   }
 };
 </script>

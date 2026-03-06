@@ -133,10 +133,6 @@ const mappedStats = computed(() => {
 
 const playerOptions = computed(() => allPlayers.value)
 
-/**
- * MODIFICACIÓN AQUÍ:
- * Añadimos "-BG" al nombre del archivo y limpiamos espacios.
- */
 const formatPlayerImage = (name) => {
   if (!name) return '/src/assets/img/logo.png'
   const cleanName = name.trim().toUpperCase()
