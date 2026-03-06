@@ -12,9 +12,16 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // Solo importamos variables y mixins globalmente
         additionalData: `@import "@/styles/variables"; @import "@/styles/mixins";`
       }
     }
+  },
+  server: {
+    host: true,
+    port: 5173,
+    watch: {
+      usePolling: true,
+    },
+    strictPort: true,
   }
 })
