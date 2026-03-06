@@ -1,11 +1,21 @@
 <template>
   <div>
     <div class="team-header">
-      <Dropdown
-        v-model="selectedCategory"
-        :options="categoryOptions"
-        label="Selecciona un equipo:"
-      />
+      <div class="controls-wrapper">
+        <Dropdown
+          v-model="selectedCategory"
+          :options="categoryOptions"
+          label="Selecciona un equipo:"
+        />
+        
+        <a 
+          href="https://competiciones.feb.es/autonomicas/Resultados.aspx?a=3" 
+          target="_blank" 
+          class="btn-clasificacion"
+        >
+          🏆 Ver Clasificación
+        </a>
+      </div>
     </div>
 
     <div v-if="loading" class="loading">Cargando datos del equipo...</div>
