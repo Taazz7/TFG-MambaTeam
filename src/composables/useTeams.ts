@@ -12,7 +12,11 @@ export function useTeams() {
     'Nacional A2 Femenino': 'nacA2Fem',
     'Nacional A2 Masculino': 'nacA2Masc',
     'Segunda Aragonesa': '2Arag',
-    'Tercera Aragonesa': '3Arag'
+    'Tercera Aragonesa': '3Arag',
+    '2ª Aragonesa': '2Arag',
+    '2 Aragonesa': '2Arag',
+    '3ª Aragonesa': '3Arag',
+    '3 Aragonesa': '3Arag'
   };
 
   const fetchTeams = async () => {
