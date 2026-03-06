@@ -8,7 +8,7 @@ export function useTeams() {
 
   // Diccionario para convertir nombres de la API a tus IDs deseados
   const nameToIdMap: Record<string, string> = {
-    'Nacional A1 Masculino': 'nacA1Masc',
+    'Nacional A1': 'nacA1Masc',
     'Nacional A2 Femenino': 'nacA2Fem',
     'Nacional A2 Masculino': 'nacA2Masc',
     'Segunda Aragonesa': '2Arag',
