@@ -11,10 +11,10 @@
       <div v-else class="cards">
         <GameCard
           v-for="(team, index) in teams"
-          :key="team.id || team.Id"
+          :key="team.id"
           :image="getTeamImage(index)" 
           :alt="team.nombre"
-          :link="'/equipo/' + (team.id || team.Id)"
+          :link="'/equipo/' + team.id" 
         />
       </div>
     </main>
@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Slider from '../components/Slider.vue'
+import Slider from '../components/slider.vue'
 import GameCard from '../components/GameCard.vue'
 import { useTeams } from '../composables/useTeams'
 
@@ -35,7 +35,6 @@ const sliderImages = ref([
   '/img/slider3.jpg'
 ])
 
-// Array con tus 5 fotos diferentes de categorías
 const categoryImages = [
   '/img/nacA1.png',
   '/img/nacA2F.png',
@@ -44,12 +43,7 @@ const categoryImages = [
   '/img/tercera.png'
 ]
 
-/**
- * Función para asignar una foto diferente según el orden del equipo
- */
 const getTeamImage = (index: number) => {
-  // Usamos el operador módulo % para que si hay más de 5 equipos, 
-  // vuelva a empezar por la primera foto y no de error.
   return categoryImages[index % categoryImages.length]
 }
 
@@ -66,4 +60,5 @@ onMounted(async () => {
   padding: 2rem;
 }
 .error { color: red; }
+
 </style>
