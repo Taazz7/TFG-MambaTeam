@@ -2,7 +2,7 @@
   <div class="card">
     <router-link :to="link">
       <img :src="image" :alt="alt" class="card__img">
-    </router-link>
+      </router-link>
   </div>
 </template>
 
