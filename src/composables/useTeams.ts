@@ -40,7 +40,7 @@ export function useTeams() {
       });
       
     } catch (err: any) {
-      error.value = err.message;
+      error.value = err.message; 
     } finally {
       loading.value = false;
     }
