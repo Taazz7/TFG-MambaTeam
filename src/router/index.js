@@ -5,6 +5,10 @@ import Player from '@/views/Player.vue'
 import FormularioJugador from '@/views/formularioJugador.vue'
 import FormularioPatrocinador from '@/views/formularioPatrocinador.vue'
 
+// Import dinámico para el panel admin
+const AdminStatsNac = () => import('@/admin/AdminStatsNac.vue')
+const AdminStatsA = () => import('@/admin/AdminStatsA.vue')
+
 const routes = [
   {
     path: '/',
@@ -34,26 +38,26 @@ const routes = [
     name: 'Player',
     component: Player,
     props: true
+  },
+
+  // -------------------------
+  // 📌 RUTAS PANEL ADMIN
+  // -------------------------
+  {
+    path: '/admin/stats/nac',
+    name: 'AdminStatsNac',
+    component: AdminStatsNac
+  },
+  {
+    path: '/admin/stats/arag',
+    name: 'AdminStatsA',
+    component: AdminStatsA
   }
-  
 ]
 
-//preguntar a oliver si esto da problema al entrar en los forms (hay que refrescar la pagina para que se muestren)
-/*const router = createRouter({
-  history: createWebHistory(),
-  routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { top: 0 }
-    }
-  }
-})*/
 const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
 
 export default router
