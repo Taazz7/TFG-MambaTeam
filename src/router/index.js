@@ -5,9 +5,15 @@ import Player from '@/views/Player.vue'
 import FormularioJugador from '@/views/formularioJugador.vue'
 import FormularioPatrocinador from '@/views/formularioPatrocinador.vue'
 
-// Import dinámico para el panel admin
+// Admin
 const AdminStatsNac = () => import('@/admin/AdminStatsNac.vue')
 const AdminStatsA = () => import('@/admin/AdminStatsA.vue')
+
+// Login
+const Login = () => import('@/views/Login.vue')
+
+// Auth composable
+import { useAuth } from '@/composables/useAuth'
 
 const routes = [
   {
@@ -40,6 +46,13 @@ const routes = [
     props: true
   },
 
+  // 🔐 LOGIN
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+
   // -------------------------
   // 📌 RUTAS PANEL ADMIN
   // -------------------------
@@ -58,6 +71,19 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// 🔐 PROTECCIÓN DE RUTAS ADMIN
+router.beforeEach((to, from, next) => {
+  const { isLoggedIn, isAdmin } = useAuth()
+
+  if (to.path.startsWith('/admin')) {
+    if (!isLoggedIn() || !isAdmin()) {
+      return next('/login')
+    }
+  }
+
+  next()
 })
 
 export default router

@@ -1,10 +1,11 @@
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost:5000/api', 
+  BASE_URL: 'http://localhost:5000/api',
   HEADERS: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   }
 };
+
 
 export const fetchData = async (endpoint: string) => {
   const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {

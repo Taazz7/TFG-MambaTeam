@@ -24,7 +24,20 @@
           </li>
           <li class="nav__item">
             <router-link class="nav__link" to="/formularioPatrocinador">Nuevo Patrocinador</router-link>
-          </li>          
+          </li>
+
+          <!-- 🔐 LOGIN / ADMIN -->
+          <li class="nav__item" v-if="!isLoggedIn()">
+            <button class="nav__link nav__button" @click="goLogin">Login</button>
+          </li>
+
+          <li class="nav__item" v-if="isLoggedIn() && isAdmin()">
+            <button class="nav__link nav__button" @click="goAdmin">Administración</button>
+          </li>
+
+          <li class="nav__item" v-if="isLoggedIn()">
+            <button class="nav__link nav__button" @click="logout">Salir</button>
+          </li>
         </ul>
       </nav>
 
@@ -33,9 +46,25 @@
 </template>
 
 <script setup>
-// No necesita lógica adicional por ahora
+import { useAuth } from '@/composables/useAuth'
+import { useRouter } from 'vue-router'
+
+const { isLoggedIn, isAdmin, logout } = useAuth()
+const router = useRouter()
+
+const goLogin = () => router.push('/login')
+const goAdmin = () => router.push('/admin/stats/nac')
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/main.scss';
+
+.nav__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  color: inherit;
+}
 </style>
