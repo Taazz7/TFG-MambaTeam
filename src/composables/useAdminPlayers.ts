@@ -54,7 +54,7 @@ export function useAdminPlayers() {
 
       jugadoresArag.value = dataArag.map((j: any) => ({
         ...j,
-        idJugador: j.jugadorArId,
+        idJugador: j.jugadorAId,
         estadisticas: {
           puntos: j.puntos,
           libres: j.libres,

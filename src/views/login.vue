@@ -75,7 +75,7 @@ const doLogin = async () => {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 25px;
-  color: #f1c40f; /* amarillo corporativo */
+  color: #f1c40f;
 }
 
 /* INPUTS */
@@ -84,19 +84,24 @@ const doLogin = async () => {
   padding: 12px 14px;
   margin-bottom: 18px;
   border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.15);
-  color: white;
+
+  /* 🔥 NUEVO: contorno negro + texto negro */
+  border: 2px solid #f1c40f
+;
+  color: #000;
+
+  background: rgba(255,255,255,0.9);
   font-size: 1rem;
 
   &::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: #000;
+    opacity: 1;
   }
 
   &:focus {
     outline: none;
     border-color: #f1c40f;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,1);
   }
 }
 
