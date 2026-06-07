@@ -1,86 +1,82 @@
-import { ref } from 'vue';
-import { API_CONFIG } from '../config/api';
+import { ref } from 'vue'
+import { API_CONFIG } from '../config/api'
+
+interface JugadorAdmin {
+  idJugador: number
+  nombre: string
+  estadisticas: any
+}
 
 export function useAdminPlayers() {
-  const playersA = ref<any[]>([]);
-  const playersNac = ref<any[]>([]);
-  const loading = ref(false);
-  const error = ref<string | null>(null);
+  const jugadoresNac = ref<JugadorAdmin[]>([])
+  const jugadoresArag = ref<JugadorAdmin[]>([])
+  const loading = ref(false)
+  const error = ref<string | null>(null)
 
-  // Cargar jugadores Aragonesa
-  const fetchPlayersA = async () => {
-    loading.value = true;
-    error.value = null;
-    try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}/JugadoresA`);
-      playersA.value = await response.json();
-    } catch (e) {
-      error.value = 'Error cargando jugadores Aragonesa';
-      console.error(e);
-    } finally {
-      loading.value = false;
-    }
-  };
+  const loadAll = async (): Promise<void> => {
+    loading.value = true
+    error.value = null
 
-  // Cargar jugadores Nacional
-  const fetchPlayersNac = async () => {
-    loading.value = true;
-    error.value = null;
     try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}/JugadoresNac`);
-      playersNac.value = await response.json();
-    } catch (e) {
-      error.value = 'Error cargando jugadores Nacional';
-      console.error(e);
-    } finally {
-      loading.value = false;
-    }
-  };
+      const resNac = await fetch(`${API_CONFIG.BASE_URL}/JugadoresNac`)
+      const dataNac = await resNac.json()
 
-  // Actualizar jugador Aragonesa
-  const updatePlayerA = async (player: any) => {
-    try {
-      const response = await fetch(
-        `${API_CONFIG.BASE_URL}/JugadoresA/${player.jugadorAId}`,
-        {
-          method: 'PUT',
-          headers: API_CONFIG.HEADERS,
-          body: JSON.stringify(player)
+      jugadoresNac.value = dataNac.map((j: any) => ({
+        ...j,
+        estadisticas: j.estadisticas || {
+          puntos: 0,
+          valoracion: 0,
+          rebotes: 0,
+          asistencias: 0,
+          porLibres: 0,
+          por2Pts: 0,
+          por3Pts: 0
         }
-      );
-      return response.ok;
-    } catch (e) {
-      console.error(e);
-      return false;
-    }
-  };
+      }))
 
-  // Actualizar jugador Nacional
-  const updatePlayerNac = async (player: any) => {
-    try {
-      const response = await fetch(
-        `${API_CONFIG.BASE_URL}/JugadoresNac/${player.jugadorNacId}`,
-        {
-          method: 'PUT',
-          headers: API_CONFIG.HEADERS,
-          body: JSON.stringify(player)
+      const resArag = await fetch(`${API_CONFIG.BASE_URL}/JugadoresA`)
+      const dataArag = await resArag.json()
+
+      jugadoresArag.value = dataArag.map((j: any) => ({
+        ...j,
+        estadisticas: j.estadisticas || {
+          puntos: 0,
+          libres: 0,
+          porLibres: 0,
+          dosPts: 0,
+          tresPts: 0
         }
-      );
-      return response.ok;
-    } catch (e) {
-      console.error(e);
-      return false;
+      }))
+    } catch (err) {
+      error.value = 'Error cargando jugadores'
+    } finally {
+      loading.value = false
     }
-  };
+  }
+
+  const saveNac = async (jugador: JugadorAdmin): Promise<void> => {
+    await fetch(`${API_CONFIG.BASE_URL}/EstadisticasNac/${jugador.idJugador}`, {
+      method: 'PUT',
+      headers: API_CONFIG.HEADERS,
+      body: JSON.stringify(jugador.estadisticas)
+    })
+  }
+
+  const saveArag = async (jugador: JugadorAdmin): Promise<void> => {
+    await fetch(`${API_CONFIG.BASE_URL}/EstadisticasArag/${jugador.idJugador}`, {
+      method: 'PUT',
+      headers: API_CONFIG.HEADERS,
+      body: JSON.stringify(jugador.estadisticas)
+    })
+  }
 
   return {
-    playersA,
-    playersNac,
+    jugadoresNac,
+    jugadoresArag,
     loading,
     error,
-    fetchPlayersA,
-    fetchPlayersNac,
-    updatePlayerA,
-    updatePlayerNac
-  };
+    loadAll,
+    saveNac,
+    saveArag
+  }
 }

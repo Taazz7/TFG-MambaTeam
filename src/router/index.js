@@ -57,15 +57,11 @@ const routes = [
   // 📌 RUTAS PANEL ADMIN
   // -------------------------
   {
-    path: '/admin/stats/nac',
-    name: 'AdminStatsNac',
-    component: AdminStatsNac
-  },
-  {
-    path: '/admin/stats/arag',
-    name: 'AdminStatsA',
-    component: AdminStatsA
+    path: '/admin/stats',
+    name: 'AdminStats',
+    component: () => import('../admin/AdminStats.vue')
   }
+
 ]
 
 const router = createRouter({

@@ -53,7 +53,7 @@ const { isLoggedIn, isAdmin, logout } = useAuth()
 const router = useRouter()
 
 const goLogin = () => router.push('/login')
-const goAdmin = () => router.push('/admin/stats/nac')
+const goAdmin = () => router.push('/admin/stats')
 </script>
 
 <style lang="scss" scoped>
