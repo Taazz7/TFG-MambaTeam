@@ -1,0 +1,26 @@
+/* ============================
+   TABLAS ADMIN
+   ============================ */
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+
+  th,
+  td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  td:last-child {
+    text-align: center;
+  }
+
+  input {
+    width: 70px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,63 @@
+/* ============================
+   BOTONES GLOBALES
+   ============================ */
+
+/* BOTÓN BASE */
+.btn {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  @include transition(all);
+}
+
+/* ============================
+   BOTÓN PRINCIPAL (ESTILO NAV)
+   ============================ */
+.btn--primary {
+  background: linear-gradient(to right, $color-dark, $color-light);
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================
+   BOTÓN SECUNDARIO
+   ============================ */
+.btn--secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+
+  &:hover {
+    background: #cbd5e0;
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================
+   BOTÓN GUARDAR (VERDE)
+   ============================ */
+.btn--success {
+  background-color: #28a745;
+  color: white;
+
+  &:hover {
+    background-color: #218838;
+  }
+
+  &:active {
+    background-color: #1e7e34;
+    transform: scale(0.97);
+  }
+}

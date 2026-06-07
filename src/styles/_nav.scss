@@ -14,18 +14,10 @@
       list-style: none;
     }
 
+    /* Ahora solo define comportamiento, no estilos visuales */
     &__link {
-      color: $color-light;
       text-decoration: none;
-      padding: $spacing-xs $spacing-sm;
-      background: linear-gradient(to right, $color-dark, $color-light);
-      border-radius: 6px;
-      font-weight: bold;
-      color: #ffffff;
-
-      &.router-link-active {
-        opacity: 0.8;
-      }
+      color: white;
     }
   }
 }

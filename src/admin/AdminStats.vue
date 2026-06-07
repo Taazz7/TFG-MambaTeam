@@ -1,7 +1,8 @@
 <template>
   <div class="admin-stats">
 
-    <h2>ESTADÍSTICAS – NACIONAL</h2>
+    <h2 class="Subtitulo">ESTADÍSTICAS – NACIONAL</h2>
+
     <table class="stats-table">
       <thead>
         <tr>
@@ -29,16 +30,18 @@
           <td><input v-model.number="j.por3Pts" /></td>
 
           <td>
-            <button class="btn-guardar" @click="saveNac(j)">
+          <button class="btn btn--success" @click="saveNac(j)">
             💾 Guardar
-            </button>
+          </button>
+
 
           </td>
         </tr>
       </tbody>
     </table>
 
-    <h2 style="margin-top: 40px;">ESTADÍSTICAS – ARAGONESA</h2>
+   <h2 class="Subtitulo">ESTADÍSTICAS – ARAGONESA</h2>
+
     <table class="stats-table">
       <thead>
         <tr>
@@ -62,9 +65,9 @@
           <td><input v-model.number="j.tresPts" /></td>
 
           <td>
-            <button class="btn-guardar" @click="saveArag(j)">
+          <button class="btn btn--success" @click="saveArag(j)">
             💾 Guardar
-            </button>
+          </button> 
 
           </td>
         </tr>
@@ -90,45 +93,3 @@ onMounted(() => {
   loadAll()
 })
 </script>
-
-<style>
-.stats-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 30px;
-}
-
-.stats-table th,
-.stats-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-}
-
-.stats-table input {
-  width: 70px;
-}
-
-.btn-guardar {
-  background-color: #28a745; /* Verde */
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: background-color 0.2s ease;
-}
-
-.btn-guardar:hover {
-  background-color: #218838; /* Verde más oscuro */
-}
-
-.btn-guardar:active {
-  background-color: #1e7e34;
-  transform: scale(0.97);
-}
-
-</style>
