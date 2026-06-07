@@ -1,10 +1,13 @@
 import { ref } from 'vue'
 import { API_CONFIG } from '../config/api'
+import { useRouter } from 'vue-router'
 
 const token = ref(localStorage.getItem('token') || null)
 const user = ref(null)
 
 export function useAuth() {
+  const router = useRouter()
+
   const isLoggedIn = () => token.value !== null
 
   const login = async (username: string, password: string) => {
@@ -23,6 +26,9 @@ export function useAuth() {
     const payload = JSON.parse(atob(jwt.split('.')[1]))
     user.value = payload
 
+    // 🔥 Redirigir automáticamente a Home
+    router.push('/')
+
     return true
   }
 
@@ -30,6 +36,9 @@ export function useAuth() {
     token.value = null
     user.value = null
     localStorage.removeItem('token')
+
+    
+    router.push('/')
   }
 
   const isAdmin = () => {
