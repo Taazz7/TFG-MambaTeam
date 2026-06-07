@@ -33,7 +33,7 @@
           <button class="btn btn--success" @click="saveNac(j)">
             💾 Guardar
           </button>
-
+          <span v-if="j._saved" class="saved-msg">Guardado ✓</span>
 
           </td>
         </tr>
@@ -68,7 +68,7 @@
           <button class="btn btn--success" @click="saveArag(j)">
             💾 Guardar
           </button> 
-
+          <span v-if="j._saved" class="saved-msg">Guardado ✓</span>
           </td>
         </tr>
       </tbody>
@@ -93,3 +93,12 @@ onMounted(() => {
   loadAll()
 })
 </script>
+
+<style scoped>
+.saved-msg {
+  color: #28a745;
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+</style>
